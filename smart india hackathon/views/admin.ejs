@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="./css/home.css">
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        
+    }
+    
+    label {
+        font-weight: bold;
+    }
+    
+    
+    select {
+        padding: 8px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 200px;
+    }
+    
+    
+    option {
+        font-size: 16px;
+    }
+    
+    
+    .container {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+</style>
+</head>
+<body>
+    <nav>
+        
+        <h1>Home</h1>
+        <h3>Welcome <%= user %></h3>
+        <h3>Password: <%= password %></h3>
+        <button onclick="logout()">logout</button>
+    </nav>
+    <h1>Admin Details</h1>
+    <div class="container">
+        <label for="dropdown">Criminal Case:</label>
+        <select id="dropdown">
+            <option value="select" disabled selected>select</option>
+            <option value="option1">Yes</option>
+            <option value="option2">No</option>
+        </select>
+    </div>
+    <br>
+        <div>
+            
+        <label for="education">Education Details</label>
+        <select  id="education">
+            <option value="select" disabled selected>--select--</option>
+            <option value="ug degree" >UG DEGREE</option>
+            <option value="pg degree" >PG DEGREE</option>
+            <option value="ug masters" >UG MASTERS</option>
+            <option value="pg masters" >PG MASTERS</option>
+        </select>
+    </div>
+    <label for="age">AGE :</label>
+    <input type="text" id="age" maxlength="2">
+    <code disabled>//Applicable for above 17 years</code><br>
+    <label for="nationality">nationality :</label>
+    <input type="text" id="nationality" style="text-transform:uppercase;">
+  
+    <script src= '/scripts/homelogout.js'></script>
+    <script>
+
+    </script>
+</body>
+</html>
