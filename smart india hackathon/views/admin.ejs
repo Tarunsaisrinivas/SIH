@@ -8,10 +8,18 @@
 <style>
     body {
         font-family: Arial, sans-serif;
-        margin: 20px;
+        margin: 20px;   
+    }
+    nav{
+        display: flex;
+        justify-content: space-between;
+        cursor: pointer;
+    }
+    nav button{
+        width: 100px;
+        height: 30px;
         
     }
-    
     label {
         font-weight: bold;
     }
@@ -43,23 +51,25 @@
         
         <h1>Home</h1>
         <h3>Welcome <%= user %></h3>
-        <h3>Password: <%= password %></h3>
+        <h3 disabled>Password: <%= password %></h3>
         <button onclick="logout()">logout</button>
     </nav>
+    <form action="/postedudetails/admin" method="post">
     <h1>Admin Details</h1>
     <div class="container">
+
         <label for="dropdown">Criminal Case:</label>
-        <select id="dropdown">
+        <select id="dropdown" name = "criminalCase">
             <option value="select" disabled selected>select</option>
-            <option value="option1">Yes</option>
-            <option value="option2">No</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
         </select>
     </div>
     <br>
         <div>
             
         <label for="education">Education Details</label>
-        <select  id="education">
+        <select  id="education" name = "educationDetails">
             <option value="select" disabled selected>--select--</option>
             <option value="ug degree" >UG DEGREE</option>
             <option value="pg degree" >PG DEGREE</option>
@@ -68,14 +78,15 @@
         </select>
     </div>
     <label for="age">AGE :</label>
-    <input type="text" id="age" maxlength="2">
+    <input type="text" id="age" maxlength="2" name = "age">
     <code disabled>//Applicable for above 17 years</code><br>
     <label for="nationality">nationality :</label>
-    <input type="text" id="nationality" style="text-transform:uppercase;">
+    <input type="text" id="nationality" style="text-transform:uppercase;" name = "nationality">
+    <input type="text" id="url" name="url" placeholder="link">
+    <input type="submit" value="Submit">
+</form>
   
     <script src= '/scripts/homelogout.js'></script>
-    <script>
 
-    </script>
 </body>
 </html>

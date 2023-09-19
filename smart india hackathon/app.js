@@ -4,6 +4,7 @@ const { default: mongoose } = require('mongoose');
 const ejs = require('ejs');
 const cookieParser = require('cookie-parser');
 const app = express();
+var nodemailer = require('nodemailer');
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static('public'));
@@ -27,13 +28,17 @@ const dbSchema = new mongoose.Schema({
     }
 });
 
-
- 
-
-
+const scholarshipSchema = new mongoose.Schema({
+        url : String,
+        criminalCase : String,
+        educationDetails: String,
+        age : String,
+        nationality: String
+})
 
 
 const User = mongoose.model('user',dbSchema);
+const Scholarships = mongoose.model('scholarship',scholarshipSchema);
 mongoose.connect('mongodb+srv://tarun:tarunsai2341@cluster0.tbd0fbb.mongodb.net/login_DB?retryWrites=true&w=majority').then(() => {
     console.log("Connected Succussfull");
 }).catch(err => console.log("Error Occured" + err));
@@ -71,6 +76,52 @@ app.post('/post-edudetails/:usr',(req,res) => {
     console.log(usr);
 
     User.findOneAndUpdate({userName: usr},{details : details}).then(() => console.log("updated succussfull")).catch(err => console.log(err));
+
+});
+
+app.post('/postedudetails/admin',async (req,res) => {
+
+    const usr = req.params.usr;
+    const details = req.body;
+    const url = details.url
+    console.log(usr);
+    delete details.url
+    await Scholarships.create({details})
+
+    var eligibleUsers = await User.find({details : details})
+    await eligibleUsers.map(
+        (user)=>{
+            console.log(user);
+            var transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                  user: 'venkatsaisrkr1010@gmail.com',
+                  pass: 'wvzhwoqgewltgnus'
+                },
+                tls: {
+                    rejectUnauthorized: false
+                  }
+              });
+              
+              var mailOptions = {
+                from: 'venkatsaisrkr1010@gmail.com',
+                to: `${user.userName}`,
+                subject: 'You are eligible for this!',
+                text: `
+                        We are delighted to let you know that you might be eligible for this scholarship.
+                        Here is the link : ${url}
+                `
+              };
+              
+              transporter.sendMail(mailOptions, function(error, info){
+                if (error) {
+                  console.log(error);
+                } else {
+                  console.log('Email sent: ' + info.response);
+                }
+              });
+        }
+    )
 
 });
 

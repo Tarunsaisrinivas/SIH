@@ -8,10 +8,18 @@
 <style>
     body {
         font-family: Arial, sans-serif;
-        margin: 20px;
+        margin: 20px;   
+    }
+    nav{
+        display: flex;
+        justify-content: space-between;
+        cursor: pointer;
+    }
+    nav button{
+        width: 100px;
+        height: 30px;
         
     }
-    
     label {
         font-weight: bold;
     }
@@ -43,7 +51,7 @@
         
         <h1>Home</h1>
         <h3>Welcome <%= user %></h3>
-        <h3>Password: <%= password %></h3>
+        <h3 disabled>Password: <%= password %></h3>
         <button onclick="logout()">logout</button>
     </nav>
     <form action="/post-edudetails/<%= user %>" method="post">
@@ -78,8 +86,6 @@
 </form>
   
     <script src= '/scripts/homelogout.js'></script>
-    <script>
 
-    </script>
 </body>
 </html>
