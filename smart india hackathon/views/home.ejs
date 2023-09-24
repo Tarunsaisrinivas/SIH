@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
-    <link rel="stylesheet" href="./css/home.css">
-<style>
+    <link rel="stylesheet" href="/css/home.css">
+<!-- <style>
     body {
         font-family: Arial, sans-serif;
         margin: 20px;   
@@ -38,32 +38,83 @@
         font-size: 16px;
     }
     
+    div{
+        padding: 30px;
+    }
     
     .container {
         display: flex;
         align-items: center;
         gap: 10px;
-    }
-</style>
+    } 
+</style>-->
+<script>
+    async function validateAadhar() {
+        const aadhar = document.getElementById("aadhar").value;
+    
+        // Make an AJAX request to the new endpoint
+        const response = await fetch('/validate-aadhar', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ aadhar }),
+        });
+    
+        const data = await response.json();
+    
+        if (data.isValid) {
+          alert('Aadhar is valid');
+        } else {
+          alert('Aadhar is not valid');
+        }
+      }
+    </script>    
 </head>
 <body>
+<div class="section">
     <nav>
-        
-        <h1>Home</h1>
-        <h3>Welcome <%= user %></h3>
-        <h3 disabled>Password: <%= password %></h3>
-        <button onclick="logout()">logout</button>
-    </nav>
-    <form action="/post-edudetails/<%= user %>" method="post">
-    <h1>Details</h1>
-    <div class="container">
+     
+        <!-- <h1>Home</h1> -->
+        <button id="toggle" class="btn-btn">Dark Mode</button>
+         <h3>Welcome <%= user %></h3>
+        <!--<h3 disabled>Password: <%= password %></h3> -->
 
+       
+        <div class="profile-image-container">
+            <img id="profile-image" src="default-profile.jpg" alt="Profile Image">
+            <input type="file" id="image-input" accept="image/*">
+        </div>    
+        <button onclick="logout()" class="btn-btn">logout</button>
+    </nav>
+    <img src="/css/book.avif" alt="" class="book" >
+    <h1 class="udetails">User Details</h1>
+    <hr>
+    <div class="container">
+        <h3><u>Current Details:</u></h3><br>
+        <h3>criminalCase: <%= criminalCase %></h3><br>
+        <h3>educationDetails: <%= educationDetails %></h3><br>
+        <h3>caste: <%= caste %></h3><br>
+        <h3>job: <%= job %></h3><br>
+        <h3>ownHouse: <%= ownHouse %></h3><br>
+        <h3>vehicle: <%= vehicle %></h3><br>
+        <h3>income: <%= income %></h3><br>
+        <h3>age: <%= age %></h3><br>
+        <h3>nationality: <%= nationality %></h3><br>
+    </div>
+    <form action="/post-edudetails/<%= user %>" method="post">
+    
+  
+    <div class="container1">
+        <div>
+            <h3><u>Fill the form</u></h3>
         <label for="dropdown">Criminal Case:</label>
         <select id="dropdown" name = "criminalCase">
             <option value="select" disabled selected>select</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
         </select>
+
     </div>
     <br>
         <div>
@@ -77,14 +128,125 @@
             <option value="pg masters" >PG MASTERS</option>
         </select>
     </div>
-    <label for="age">AGE :</label>
+<br>
+    <div>
+        <label for="caste">Caste Details</label>
+        <select  id="caste" name = "caste">
+            <option value="select" disabled selected>--select--</option>
+            <option value="sc" >SC</option>
+            <option value="st" >ST</option>
+            <option value="bc" >BC</option>
+            <option value="oc" >OC</option>
+        </select>
+    </div>
+    <br>
+    <div>
+        <label for="job">job Details</label>
+        <select  id="job" name = "job">
+            <option value="select" disabled selected>--select--</option>
+            <option value="government" >Government</option>
+            <option value="private" >Private</option>
+            <option value="labour">Labour</option>
+       
+        </select>
+    </div>
+<br>
+    <div>
+        <label for="own house">House Details</label>
+        <select  id="own house" name = "ownHouse">
+            <option value="select" disabled selected>--select--</option>
+            <option value="yes" >yes</option>
+            <option value="no" >No</option>
+       
+        </select>
+    </div>
+    <br>
+    <div>
+        <label for="vehicle">vehicle Details</label>
+        <select  id="vehicle" name = "vehicle">
+            <option value="select" disabled selected>--select--</option>
+            <option value="4" >4 - Wheeler</option>
+            <option value="2" >2 - Wheeler</option>
+       
+        </select>
+    </div>
+    <br>
+    <!-- <div>
+        <label for="people">people Details</label>
+        <select  id="people" name = "people">
+            <option value="select" disabled selected>--select--</option>
+            <option value="1" >1</option>
+            <option value="2" >2</option>
+            <option value="3" >3</option>
+            <option value="4" >4</option>
+            <option value="5" >5</option>
+            <option value="more" >more</option>
+       
+        </select>
+    </div>
+    <div>
+        <label for="girl">Female Child Details</label>
+        <select  id="girl" name = "girl">
+            <option value="select" disabled selected>--select--</option>
+            <option value="1" >1</option>
+            <option value="2" >2</option>
+            <option value="3" >3</option>
+            <option value="4" >4</option>
+            <option value="5" >5</option>
+            <option value="more" >more</option>
+       
+        </select>
+    </div> -->
+    
+    <label for="income">Income ammount:</label><br>
+        <input type="number" id="income" name="income">
+<br> <br>
+    <label for="age">AGE :</label><br>
     <input type="text" id="age" maxlength="2" name = "age">
     <code disabled>//Applicable for above 17 years</code><br>
-    <label for="nationality">nationality :</label>
-    <input type="text" id="nationality" style="text-transform:uppercase;" name = "nationality">
-    <input type="submit" value="Submit">
+    <br>
+    <label for="nationality">nationality :</label><br>
+    <input type="text" id="nationality" style="text-transform:uppercase;" name = "nationality"><br><br>
+    <input type="submit" value="submit" class="sub">
+
+</div>
+<br>
 </form>
-  
+<!-- <label for="aadhar">Aadhar: </label>
+    <input type="text" id="aadhar" name="aadhar">
+    <button onclick="validateAadhar()">Validate aadhar</button> -->
+<!-- <hr> -->
+<br><br>
+
+</div>
+
+
+
+
+<script>
+    const themeToggle = document.getElementById('toggle');
+    const body = document.body;
+
+    themeToggle.addEventListener('click', function () {
+        body.classList.toggle('dark-mode');
+    });
+</script>
+<script>
+    const imageInput = document.getElementById('image-input');
+const profileImage = document.getElementById('profile-image');
+
+imageInput.addEventListener('change', function () {
+    const file = imageInput.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            profileImage.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
+});
+
+</script>
     <script src= '/scripts/homelogout.js'></script>
 
 </body>

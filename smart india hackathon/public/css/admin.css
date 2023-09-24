@@ -1,0 +1,73 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding: 10px;
+    background: linear-gradient(to right,rgba(232, 105, 238),rgba(114, 179, 236 ));
+    color: #fff;
+    transition: 0.5s ease-in-out ;
+
+    
+}
+::-webkit-scrollbar{
+    display: none;
+}
+
+.sub{
+    background-color: rgb(16, 93, 237);
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+}
+.sub:hover{
+    transform: scale(1.2);
+}
+nav{
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+}
+nav button{
+    width: 100px;
+    height: 30px;
+    
+}
+label {
+    font-weight: bold;
+}
+
+
+select {
+    display: flex;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 200px;
+}
+
+
+option {
+    font-size: 16px;
+}
+
+.details{
+    position: relative;
+    left: 40%;
+}
+.container {
+ 
+    align-items: center;
+    gap: 10px;
+}
+.black-box {
+    background-color: rgba(12, 5, 5, 0.349);
+    color: white;
+    position: relative;
+    left: 50%;
+    top: -60%;
+    width:250px;
+    height: 30vh;
+    padding: 20px; /* Add padding for spacing inside the box */
+    float: left; /* Float the box to the left to position it next to the form */
+}

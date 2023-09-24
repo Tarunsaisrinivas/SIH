@@ -1,0 +1,71 @@
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background:url("./oi3Hvs.jpg");
+            color: #fff;
+            overflow: hidden;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 60px 350px;
+            padding: 20px;
+            background:transparent;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border: 2px solid #fff;
+        }
+        .image{
+            height : auto ;
+            margin-left: 38%;
+        }
+        h2 {
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 97%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background: transparent;
+            color: #fff;
+        }
+
+        .signup-btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .signup-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .login-link a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }

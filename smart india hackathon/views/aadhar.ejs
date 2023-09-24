@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aadhar Details</title>
+</head>
+<body>
+
+
+
+    <h1>Aadhar Details</h1>
+    <% if (users.length > 0) { %>
+        <table>
+            <thead>
+                <tr>
+                    <th>Aadhar</th>
+                    <th>Income</th>
+                    <th>Criminal Case</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% users.forEach((user) => { %>
+                    <tr>
+                        <td><%= user.adhar %></td>
+                        <td><%= user.income %></td>
+                        <td><%= user.criminalCase %></td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    <% } else { %>
+        <p>No Aadhar details found.</p>
+    <% } %>
+</body>
+</html>

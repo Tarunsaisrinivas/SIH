@@ -5,6 +5,8 @@ const ejs = require('ejs');
 const cookieParser = require('cookie-parser');
 const app = express();
 var nodemailer = require('nodemailer');
+const fs = require('fs');
+const aadhar = require('./schemas/aadhar');
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static('public'));
@@ -23,8 +25,15 @@ const dbSchema = new mongoose.Schema({
     details: {
         criminalCase : String,
         educationDetails: String,
+        caste:String,
+        job:String,
+        ownHouse:String,
+        vehicle:String,
+        income:String,
         age : String,
         nationality: String
+
+
     }
 });
 
@@ -32,8 +41,16 @@ const scholarshipSchema = new mongoose.Schema({
         url : String,
         criminalCase : String,
         educationDetails: String,
+        caste:String,
+        job:String,
+        ownHouse:String,
+        vehicle:String,
+        people:String,
+        girl:String,
+        income:String,
         age : String,
         nationality: String
+
 })
 
 
@@ -58,14 +75,31 @@ app.get('/signup', (req,res) => {
 app.get('/', (req,res) => {
     const usr = req.cookies.user;
     const pass = req.cookies.password;
+    
     if(usr== 'admin@gmail.com')
     {
         res.render('admin',{user : usr, password: pass});
     }
     else if (usr){
-        res.render('home',{user : usr, password: pass});
+        const details = req.cookies.details
+        res.render('home', {
+            user:usr,
+            password:pass,
+            criminalCase: details.criminalCase,
+            educationDetails: details.educationDetails,
+            caste: details.caste,
+            job: details.job,
+            ownHouse: details.ownHouse,
+            vehicle: details.vehicle,
+            income: details.income,
+            age: details.age,
+            nationality: details.nationality,
+        });
     }else{
-        res.redirect('/login');
+        
+        const data = fs.readFileSync('index.html', 'utf8');
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+        res.end(data);
     }
 });
 
@@ -86,22 +120,25 @@ app.post('/postedudetails/admin',async (req,res) => {
     const url = details.url
     console.log(usr);
     delete details.url
-    await Scholarships.create({details})
+    console.log(details);
+    await Scholarships.create({...details})
 
     var eligibleUsers = await User.find({details : details})
+    var emails = []
     await eligibleUsers.map(
         (user)=>{
             console.log(user);
+            emails.push(user.userName)
             var transporter = nodemailer.createTransport({
                 service: 'gmail',
                 auth: {
-                  user: 'venkatsaisrkr1010@gmail.com',
-                  pass: 'wvzhwoqgewltgnus'
+                  user: 'tarunsaisrinivas7@gmail.com',
+                  pass: 'cgtw trom outi dsdw'
                 },
                 tls: {
                     rejectUnauthorized: false
                   }
-              });
+              });``
               
               var mailOptions = {
                 from: 'venkatsaisrkr1010@gmail.com',
@@ -122,19 +159,29 @@ app.post('/postedudetails/admin',async (req,res) => {
               });
         }
     )
+    res.render('admin1',{
+        emails : emails
+    })
 
 });
 
 //APIs 
+
+app.get('/adhar',async (req,res)=>{
+    const users = await aadhar.find({})
+    res.status(200).json({users})
+})
 
 app.post('/login', (req,res) => {
     const body = req.body;
     User.findOne({userName: body.userName}).then(user => {
         if(user){
             if(user.password == body.password)
-            {
-                res.cookie("user",body.userName);
-                res.cookie("password", body.password);
+            { 
+                console.log(user);
+                res.cookie("user",user.userName);
+                res.cookie("password", user.password);
+                res.cookie('details',user.details)
                 res.json({stat: true, msg: "User Atunticated"});
             }else{
                 res.json({stat: false, msg: "Wrong password"});

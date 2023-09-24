@@ -4,59 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
-    <link rel="stylesheet" href="./css/home.css">
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 20px;   
-    }
-    nav{
-        display: flex;
-        justify-content: space-between;
-        cursor: pointer;
-    }
-    nav button{
-        width: 100px;
-        height: 30px;
-        
-    }
-    label {
-        font-weight: bold;
-    }
-    
-    
-    select {
-        padding: 8px;
-        font-size: 16px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        width: 200px;
-    }
-    
-    
-    option {
-        font-size: 16px;
-    }
-    
-    
-    .container {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-</style>
+    <link rel="stylesheet" href="./css/admin.css">
+
 </head>
 <body>
-    <nav>
-        
+    <nav style="background: transparent">
         <h1>Home</h1>
-        <h3>Welcome <%= user %></h3>
-        <h3 disabled>Password: <%= password %></h3>
-        <button onclick="logout()">logout</button>
+        <img src="data:image/jpeg;base64,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" placeholder="Image" width="200px">
+        <button onclick="logout()" style="color: black;background-color: red;">logout</button>
+        
     </nav>
+
+    <div class="container" style="height: 120vh;">
     <form action="/postedudetails/admin" method="post">
     <h1>Admin Details</h1>
-    <div class="container">
+    <div class="container1">
 
         <label for="dropdown">Criminal Case:</label>
         <select id="dropdown" name = "criminalCase">
@@ -77,16 +39,91 @@
             <option value="pg masters" >PG MASTERS</option>
         </select>
     </div>
-    <label for="age">AGE :</label>
+    <div>
+        <label for="caste">Caste Details</label>
+        <select  id="caste" name = "caste">
+            <option value="select" disabled selected>--select--</option>
+            <option value="sc" >SC</option>
+            <option value="st" >ST</option>
+            <option value="bc" >BC</option>
+            <option value="oc" >OC</option>
+        </select>
+    </div>
+    <div>
+        <label for="job">job Details</label>
+        <select  id="job" name = "job">
+            <option value="select" disabled selected>--select--</option>
+            <option value="government" >Government</option>
+            <option value="private" >Private</option>
+            <option value="labour">Labour</option>
+        </select>
+    </div>
+
+    <div>
+        <label for="own house">House Details</label>
+        <select  id="own house" name = "ownHouse">
+            <option value="select" disabled selected>--select--</option>
+            <option value="yes" >yes</option>
+            <option value="no" >No</option>
+       
+        </select>
+    </div>
+    <div>
+        <label for="vehicle">vehicle Details</label>
+        <select  id="vehicle" name = "vehicle">
+            <option value="select" disabled selected>--select--</option>
+            <option value="4" >4 - Wheeler</option>
+            <option value="2" >2 - Wheeler</option>
+       
+        </select>
+    </div>
+    <!-- <div>
+        <label for="people">people Details</label>
+        <select  id="people" name = "people">
+            <option value="select" disabled selected>--select--</option>
+            <option value="1" >1</option>
+            <option value="2" >2</option>
+            <option value="3" >3</option>
+            <option value="4" >4</option>
+            <option value="5" >5</option>
+            <option value="more" >more</option>
+       
+        </select>
+    </div>
+    <div>
+        <label for="girl">Female Child Details</label>
+        <select  id="girl" name = "girl">
+            <option value="select" disabled selected>--select--</option>
+            <option value="1" >1</option>
+            <option value="2" >2</option>
+            <option value="3" >3</option>
+            <option value="4" >4</option>
+            <option value="5" >5</option>
+            <option value="more" >more</option>
+       
+        </select>
+    </div> -->
+    
+    <label for="income">Income ammount</label><br>
+        <input type="number" name="income" id="income" ><br>
+        
+    <label for="age">AGE :</label><br>
     <input type="text" id="age" maxlength="2" name = "age">
     <code disabled>//Applicable for above 17 years</code><br>
-    <label for="nationality">nationality :</label>
-    <input type="text" id="nationality" style="text-transform:uppercase;" name = "nationality">
-    <input type="text" id="url" name="url" placeholder="link">
-    <input type="submit" value="Submit">
-</form>
-  
-    <script src= '/scripts/homelogout.js'></script>
+    <label for="nationality">nationality :</label><br>
+    <input type="text" id="nationality" style="text-transform:uppercase;" name = "nationality"><br><br>
+    <input type="text" id="url" name="url" placeholder="link"><br><br>  
 
+    <input type="submit" value="Submit" onclick="validate()" class="sub">
+</form>
+
+
+<div class="clear"></div>
+</div>
+
+    <script src= '/scripts/homelogout.js'></script>
+    <script>
+        
+    </script>
 </body>
 </html>
